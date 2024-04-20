@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 function Navbar() {
   return (
     <>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-primary text-primary-content">
         <div className="navbar-start">
           <div className="dropdown">
             <div
@@ -28,7 +28,7 @@ function Navbar() {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-primary rounded-box w-52"
             >
               <li>
                 <a>Homepage</a>
@@ -43,7 +43,7 @@ function Navbar() {
           </div>
         </div>
         <div className="navbar-center">
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <a className="btn btn-ghost text-xl">Todo Application</a>
         </div>
         <div className="navbar-end">
           <button className="btn btn-ghost btn-circle">
