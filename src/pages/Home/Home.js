@@ -1,7 +1,10 @@
+import TodoList from "../../components/TodoList/TodoList";
+
 function Home() {
   return (
-    <div>
-      <h1>Home Page</h1>
+    <div className="flex mt-4 text-3xl flex-col justify-center items-center">
+      <h1 className="font-extrabold">List Of All Todos</h1>
+      <TodoList />
     </div>
   );
 }

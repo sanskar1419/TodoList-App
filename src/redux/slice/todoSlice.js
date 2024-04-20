@@ -72,7 +72,7 @@ const todoSlice = createSlice({
     },
     deleteTodo: (state, action) => {
       state.todos.map((todo) => {
-        if (todo.id !== payload) {
+        if (todo.id !== action.payload) {
           return todo;
         }
       });
@@ -108,3 +108,5 @@ const todoSlice = createSlice({
 
 export const todoReducer = todoSlice.reducer;
 export const todoActions = todoSlice.actions;
+
+export const getTodos = (state) => state.todo.todos;
