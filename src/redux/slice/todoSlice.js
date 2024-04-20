@@ -7,20 +7,24 @@ const initialState = {
 };
 
 export const getAllTodoAsync = createAsyncThunk("add/getAll", async () => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/users/1/todos"
+  );
   return await response.json();
 });
 
 export const addTodoAsync = createAsyncThunk("todo/add", async (payload) => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/todos", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      userId: 11,
-      title: payload.title,
-      completed: false,
-    }),
-  });
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/users/1/todos",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: payload.title,
+        completed: false,
+      }),
+    }
+  );
   return await response.json();
 });
 
@@ -43,6 +47,19 @@ export const updateTodoAsync = createAsyncThunk(
   }
 );
 
+export const deleteTodoAsync = createAsyncThunk(
+  "todo/delete",
+  async (payload, thunkAPI) => {
+    await fetch(`https://jsonplaceholder.typicode.com/todos/${payload}`, {
+      method: "DELETE",
+    }).then((response) => {
+      if (response.ok) {
+        thunkAPI.dispatch(todoActions.setMessage(""));
+      }
+    });
+  }
+);
+
 const todoSlice = createSlice({
   name: "todo",
   initialState,
@@ -52,6 +69,13 @@ const todoSlice = createSlice({
     },
     setMessage: (state, action) => {
       state.message = action.payload;
+    },
+    deleteTodo: (state, action) => {
+      state.todos.map((todo) => {
+        if (todo.id !== payload) {
+          return todo;
+        }
+      });
     },
   },
   extraReducers: (builder) => {
