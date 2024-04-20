@@ -1,5 +1,6 @@
 import editImage from "../../images/edit.png";
 import spider from "../../images/spider.jpg";
+import deleteImg from "../../images/delete.png";
 
 function Todo({ todo }) {
   return (
@@ -8,9 +9,12 @@ function Todo({ todo }) {
         <img src={spider} alt="Movie" />
       </figure>
       <div className="card-body">
-        <div className="card-actions absolute top-0 right-0">
+        <div className="card-actions absolute top-0 right-1">
           <button className="btn btn-square">
             <img src={editImage} width="40px" />
+          </button>
+          <button className="btn btn-square">
+            <img src={deleteImg} width="40px" />
           </button>
         </div>
         <p className="text-lg font-bold">{todo.title}</p>
