@@ -11,6 +11,19 @@ export const getAllTodoAsync = createAsyncThunk("add/getAll", async () => {
   return await response.json();
 });
 
+export const addTodoAsync = createAsyncThunk("todo/add", async (payload) => {
+  const response = await fetch("https://jsonplaceholder.typicode.com/todos", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      userId: 11,
+      title: payload.title,
+      completed: false,
+    }),
+  });
+  return await response.json();
+});
+
 const todoSlice = createSlice({
   name: "todo",
   initialState,
@@ -23,10 +36,15 @@ const todoSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getAllTodoAsync.fulfilled, (state, action) => {
-      state.todos = [...action.payload];
-      state.loading = false;
-    });
+    builder
+      .addCase(getAllTodoAsync.fulfilled, (state, action) => {
+        state.todos = [...action.payload];
+        state.loading = false;
+      })
+      .addCase(addTodoAsync.fulfilled, (state, action) => {
+        state.todos.push(action.payload);
+        state.message = "Todo Added Successfully";
+      });
   },
 });
 
