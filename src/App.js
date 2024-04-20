@@ -1,10 +1,11 @@
 import React from "react";
+import { RouterProvider } from "react-router-dom";
 
 function App() {
   return (
-    <div>
-      <h1 className="text-4xl">Hii this is a todo app</h1>
-    </div>
+    <>
+      <RouterProvider />
+    </>
   );
 }
 
