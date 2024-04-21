@@ -49,7 +49,7 @@ function UpdateTodo() {
   /* Returning the JSX */
   return (
     <div className="flex mt-4 text-3xl flex-col justify-center items-center">
-      <h1 className="font-extrabold mb-5">Add A New Todo</h1>
+      <h1 className="font-extrabold mb-5">Update Todo</h1>
       <input
         type="text"
         placeholder="Type Your Task Here"
