@@ -26,6 +26,7 @@ function Todo({ todo }) {
   };
 
   const handleToggleTodo = () => {
+    dispatch(todoActions.setKey(todo.id));
     dispatch(todoActions.startToggleLoading());
     dispatch(
       updateTodoAsync({
@@ -67,7 +68,7 @@ function Todo({ todo }) {
           >
             {todo.completed ? "Completed" : "Not Completed"}
           </button>
-          {toggleLoading ? (
+          {toggleLoading && key === todo.id ? (
             <div>
               <span className="loading loading-spinner text-info"></span>
             </div>

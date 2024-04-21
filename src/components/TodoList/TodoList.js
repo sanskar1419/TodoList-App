@@ -10,10 +10,10 @@ import Todo from "../Todo/Todo";
 function TodoList() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  /*  useEffect(() => {
     dispatch(todoActions.fetchStart());
     dispatch(getAllTodoAsync());
-  }, []);
+  }, []); */
 
   const todos = useSelector(getTodos);
 
