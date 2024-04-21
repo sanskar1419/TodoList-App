@@ -7,6 +7,7 @@ const initialState = {
   deleteLoading: false,
   error: null,
   key: null,
+  addLoading: false,
 };
 
 export const getAllTodoAsync = createAsyncThunk("add/getAll", async () => {
@@ -23,7 +24,7 @@ export const addTodoAsync = createAsyncThunk("todo/add", async (payload) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        title: payload.title,
+        title: payload,
         completed: false,
       }),
     }
@@ -99,6 +100,9 @@ const todoSlice = createSlice({
     resetError: (state, action) => {
       state.error = null;
     },
+    startAddLoading: (state, action) => {
+      state.addLoading = true;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -106,10 +110,18 @@ const todoSlice = createSlice({
         state.todos = [...action.payload];
         state.loading = false;
       })
+      .addCase(getAllTodoAsync.rejected, (state, action) => {
+        state.error = "Something went wrong";
+        state.loading = false;
+      })
       .addCase(addTodoAsync.fulfilled, (state, action) => {
         state.todos.unshift(action.payload);
-        state.loading = false;
+        state.addLoading = false;
         state.message = "Todo Added Successfully";
+      })
+      .addCase(addTodoAsync.rejected, (state, action) => {
+        state.error = "Unable To Add Todo";
+        state.addLoading = false;
       })
       .addCase(updateTodoAsync.fulfilled, (state, action) => {
         state.todos.map((todo) => {
@@ -136,3 +148,4 @@ export const getTodoDeleteLoading = (state) => state.todo.deleteLoading;
 export const getKey = (state) => state.todo.key;
 export const getMessage = (state) => state.todo.message;
 export const getError = (state) => state.todo.error;
+export const getAddTodoLoading = (state) => state.todo.addLoading;

@@ -32,16 +32,18 @@ function Navbar() {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-primary rounded-box w-52"
             >
               <li>
-                <Link>Homepage</Link>
+                <Link to="/">Homepage</Link>
               </li>
               <li>
-                <Link>Add Todo</Link>
+                <Link to="/add">Add Todo</Link>
               </li>
             </ul>
           </div>
         </div>
         <div className="navbar-center">
-          <a className="btn btn-ghost text-xl">Todo Application</a>
+          <Link to="/" className="btn btn-ghost text-xl">
+            Todo Application
+          </Link>
         </div>
         <div className="navbar-end">
           <button className="btn btn-ghost btn-circle">
@@ -62,7 +64,7 @@ function Navbar() {
           </button>
           <button className="btn btn-ghost btn-circle">
             <div className="indicator">
-              <Link>
+              <Link to="/add">
                 {" "}
                 <img src={addImage} alt="Add" width="40px" />
               </Link>

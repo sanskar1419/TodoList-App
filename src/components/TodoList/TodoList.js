@@ -20,7 +20,7 @@ function TodoList() {
   return (
     <div className="mt-4">
       {todos.map((todo) => (
-        <Todo todo={todo} />
+        <Todo todo={todo} key={todo.id} />
       ))}
     </div>
   );
