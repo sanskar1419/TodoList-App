@@ -93,6 +93,12 @@ const todoSlice = createSlice({
       const todoIndex = state.todos.findIndex((t) => t.id === action.payload);
       state.todos.splice(todoIndex, 1);
     },
+    resetMessage: (state, action) => {
+      state.message = null;
+    },
+    resetError: (state, action) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -128,3 +134,5 @@ export const todoActions = todoSlice.actions;
 export const getTodos = (state) => state.todo.todos;
 export const getTodoDeleteLoading = (state) => state.todo.deleteLoading;
 export const getKey = (state) => state.todo.key;
+export const getMessage = (state) => state.todo.message;
+export const getError = (state) => state.todo.error;

@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.errorAlert {
+  position: fixed;
+  top: 17%;
+  right: 20px;
+  animation: slide-in-out 2s ease-in-out forwards;
+  transform: translateX(110%);
+  z-index: 999;
+}
+
+.alertMessage {
+  position: fixed;
+  top: 17%;
+  right: 20px;
+  animation: slide-in-out 2s ease-in-out forwards;
+  transform: translateX(110%);
+  z-index: 999;
+}
+
+@keyframes slide-in-out {
+  10% {
+    transform: translateX(0);
+  }
+  90% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(150%);
+  }
+}
