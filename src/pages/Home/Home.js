@@ -1,28 +1,40 @@
+// Importing necessary module, component etc.
 import { useDispatch, useSelector } from "react-redux";
 import TodoList from "../../components/TodoList/TodoList";
 import { getError, getMessage, todoActions } from "../../redux/slice/todoSlice";
 import { useEffect } from "react";
 
+/* Defining functional Home component */
 function Home() {
+  /* Defining Dispatcher */
   const dispatch = useDispatch();
+  /* Getting message using useSelector hook from redux store */
   const message = useSelector(getMessage);
+  /* Getting error using useSelector hook from redux store */
   const error = useSelector(getError);
 
+  /* Using useEffect hook to reset the message and error to null whenever they changes */
   useEffect(() => {
+    /* If message exist */
     if (message) {
       setTimeout(() => {
+        /* Dispatching a action to reset message */
         dispatch(todoActions.resetMessage());
       }, 2000);
     }
+    /* If error exist */
     if (error) {
       setTimeout(() => {
+        /* Dispatching a action to reset error */
         dispatch(todoActions.resetError());
       }, 2000);
     }
   }, [message, error]);
 
+  /* Returning the JSX */
   return (
     <>
+      {/* If message is there showing the alert */}
       {message && (
         <div role="alert" className="alert alert-success alertMessage">
           <svg
@@ -41,6 +53,7 @@ function Home() {
           <span>{message}</span>
         </div>
       )}
+      {/* If error is there showing the alert */}
       {error && (
         <div role="alert" className="alert alert-error errorAlert">
           <svg
@@ -61,10 +74,12 @@ function Home() {
       )}
       <div className="flex mt-4 text-3xl flex-col justify-center items-center">
         <h1 className="font-extrabold">List Of All Todos</h1>
+        {/* Rendering the TodoList component */}
         <TodoList />
       </div>
     </>
   );
 }
 
+/* Exporting Home Component */
 export default Home;

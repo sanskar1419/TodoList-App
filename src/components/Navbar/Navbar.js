@@ -1,7 +1,10 @@
+// Importing necessary module, component etc.
 import { Outlet, Link } from "react-router-dom";
 import addImage from "../../images/add.png";
 
+/* Defining functional Navbar component */
 function Navbar() {
+  /* Returning the JSX */
   return (
     <>
       <div className="navbar bg-primary text-primary-content">
@@ -32,15 +35,18 @@ function Navbar() {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-primary rounded-box w-52"
             >
               <li>
+                {/* Redirecting to home page */}
                 <Link to="/">Homepage</Link>
               </li>
               <li>
+                {/* Redirecting to add page */}
                 <Link to="/add">Add Todo</Link>
               </li>
             </ul>
           </div>
         </div>
         <div className="navbar-center">
+          {/* Redirecting to home page */}
           <Link to="/" className="btn btn-ghost text-xl">
             Todo Application
           </Link>
@@ -72,9 +78,11 @@ function Navbar() {
           </button>
         </div>
       </div>
+      {/* Using Outlet component to load the children */}
       <Outlet />
     </>
   );
 }
 
+/* Exporting Navbar Component */
 export default Navbar;
