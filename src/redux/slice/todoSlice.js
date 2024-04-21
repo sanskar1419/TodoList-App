@@ -8,6 +8,7 @@ const initialState = {
   error: null,
   key: null,
   addLoading: false,
+  toggleLoading: false,
 };
 
 export const getAllTodoAsync = createAsyncThunk("add/getAll", async () => {
@@ -103,6 +104,9 @@ const todoSlice = createSlice({
     startAddLoading: (state, action) => {
       state.addLoading = true;
     },
+    startToggleLoading: (state, action) => {
+      state.toggleLoading = true;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -124,18 +128,16 @@ const todoSlice = createSlice({
         state.addLoading = false;
       })
       .addCase(updateTodoAsync.fulfilled, (state, action) => {
-        state.todos.map((todo) => {
-          if (
-            todo.id === action.payload.id &&
-            todo.userId === action.payload.userId
-          ) {
-            return action.payload;
-          }
-
-          return todo;
-        });
-        state.loading = false;
-        state.message = "Todo Updated Successfully";
+        if (action.payload.id) {
+          const index = state.todos.findIndex(
+            (t) => t.id === action.payload.id
+          );
+          state.todos[index].completed = !state.todos[index].completed;
+          state.message = "Todo Updated Successfully";
+          state.toggleLoading = false;
+        } else {
+          state.error = "Unable to update Todo";
+        }
       });
   },
 });
@@ -149,3 +151,4 @@ export const getKey = (state) => state.todo.key;
 export const getMessage = (state) => state.todo.message;
 export const getError = (state) => state.todo.error;
 export const getAddTodoLoading = (state) => state.todo.addLoading;
+export const getToggleTodoLoading = (state) => state.todo.toggleLoading;

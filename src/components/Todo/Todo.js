@@ -6,18 +6,33 @@ import {
   deleteTodoAsync,
   getKey,
   getTodoDeleteLoading,
+  getToggleTodoLoading,
   todoActions,
+  updateTodoAsync,
 } from "../../redux/slice/todoSlice";
 
 function Todo({ todo }) {
   const dispatch = useDispatch();
   const deleteLoading = useSelector(getTodoDeleteLoading);
   const key = useSelector(getKey);
+  const toggleLoading = useSelector(getToggleTodoLoading);
 
   const handleDelete = () => {
     dispatch(todoActions.setKey(todo.id));
     dispatch(todoActions.deleteTodoStart());
     dispatch(deleteTodoAsync(todo.id));
+  };
+
+  const handleToggleTodo = () => {
+    dispatch(todoActions.startToggleLoading());
+    dispatch(
+      updateTodoAsync({
+        id: todo.id,
+        title: todo.title,
+        userId: todo.userId,
+        completed: !todo.completed,
+      })
+    );
   };
 
   return (
@@ -45,7 +60,15 @@ function Todo({ todo }) {
           >
             {todo.completed ? "Completed" : "Not Completed"}
           </button>
-          <button className="btn btn-secondary">Toggle Todo</button>
+          {toggleLoading ? (
+            <div>
+              <span className="loading loading-spinner text-info"></span>
+            </div>
+          ) : (
+            <button className="btn btn-secondary" onClick={handleToggleTodo}>
+              Toggle Todo
+            </button>
+          )}
         </div>
       </div>
     </div>
