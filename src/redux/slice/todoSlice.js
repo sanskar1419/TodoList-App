@@ -4,6 +4,9 @@ const initialState = {
   message: null,
   todos: [],
   loading: false,
+  deleteLoading: false,
+  error: null,
+  key: null,
 };
 
 export const getAllTodoAsync = createAsyncThunk("add/getAll", async () => {
@@ -54,8 +57,12 @@ export const deleteTodoAsync = createAsyncThunk(
       method: "DELETE",
     }).then((response) => {
       if (response.ok) {
-        thunkAPI.dispatch(todoActions.setMessage(""));
+        thunkAPI.dispatch(todoActions.deleteTodo(payload));
+        thunkAPI.dispatch(todoActions.setMessage("Todo Deleted Successfully"));
+      } else {
+        thunkAPI.dispatch(todoActions.setError("Unable To Delete Todo"));
       }
+      thunkAPI.dispatch(todoActions.deleteTodoEnd());
     });
   }
 );
@@ -67,15 +74,24 @@ const todoSlice = createSlice({
     fetchStart: (state, action) => {
       state.loading = true;
     },
+    deleteTodoStart: (state, action) => {
+      state.deleteLoading = true;
+    },
+    deleteTodoEnd: (state, action) => {
+      state.deleteLoading = false;
+    },
     setMessage: (state, action) => {
       state.message = action.payload;
     },
+    setKey: (state, action) => {
+      state.key = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
     deleteTodo: (state, action) => {
-      state.todos.map((todo) => {
-        if (todo.id !== action.payload) {
-          return todo;
-        }
-      });
+      const todoIndex = state.todos.findIndex((t) => t.id === action.payload);
+      state.todos.splice(todoIndex, 1);
     },
   },
   extraReducers: (builder) => {
@@ -110,3 +126,5 @@ export const todoReducer = todoSlice.reducer;
 export const todoActions = todoSlice.actions;
 
 export const getTodos = (state) => state.todo.todos;
+export const getTodoDeleteLoading = (state) => state.todo.deleteLoading;
+export const getKey = (state) => state.todo.key;
