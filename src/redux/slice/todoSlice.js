@@ -9,6 +9,7 @@ const initialState = {
   key: null,
   addLoading: false,
   toggleLoading: false,
+  todoToUpdate: null,
 };
 
 export const getAllTodoAsync = createAsyncThunk("add/getAll", async () => {
@@ -107,6 +108,12 @@ const todoSlice = createSlice({
     startToggleLoading: (state, action) => {
       state.toggleLoading = true;
     },
+    setUpdateTodo: (state, action) => {
+      state.todoToUpdate = action.payload;
+    },
+    resetUpdateTodo: (state, action) => {
+      state.todoToUpdate = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -133,6 +140,7 @@ const todoSlice = createSlice({
             (t) => t.id === action.payload.id
           );
           state.todos[index].completed = !state.todos[index].completed;
+          state.todos[index].title = action.payload.title;
           state.message = "Todo Updated Successfully";
           state.toggleLoading = false;
         } else {
@@ -152,3 +160,4 @@ export const getMessage = (state) => state.todo.message;
 export const getError = (state) => state.todo.error;
 export const getAddTodoLoading = (state) => state.todo.addLoading;
 export const getToggleTodoLoading = (state) => state.todo.toggleLoading;
+export const getUpdatedTodo = (state) => state.todo.todoToUpdate;

@@ -10,9 +10,11 @@ import {
   todoActions,
   updateTodoAsync,
 } from "../../redux/slice/todoSlice";
+import { useNavigate } from "react-router-dom";
 
 function Todo({ todo }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const deleteLoading = useSelector(getTodoDeleteLoading);
   const key = useSelector(getKey);
   const toggleLoading = useSelector(getToggleTodoLoading);
@@ -35,6 +37,11 @@ function Todo({ todo }) {
     );
   };
 
+  const handleEdit = () => {
+    dispatch(todoActions.setUpdateTodo(todo));
+    navigate("/update");
+  };
+
   return (
     <div className="card card-side bg-base-300 shadow-xl mb-4 max-w-3xl">
       <figure>
@@ -42,7 +49,7 @@ function Todo({ todo }) {
       </figure>
       <div className="card-body">
         <div className="card-actions absolute top-0 right-1">
-          <button className="btn btn-square">
+          <button className="btn btn-square" onClick={handleEdit}>
             <img src={editImage} width="40px" />
           </button>
           <button className="btn bg-transparent" onClick={handleDelete}>
