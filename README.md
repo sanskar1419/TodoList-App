@@ -4,7 +4,7 @@ TodoList_App is a simple todo application where user an manage there task and ha
 
 ## Tech Stack
 
-**Client:** ReactJs, CSS, HTML, Redux
+**Client:** ReactJs, CSS, HTML, Redux, tailwind Css
 
 ## Installation
 
