@@ -1,8 +1,13 @@
 /* Importing Hooks, method, function etc. */
 import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { getAllTodoAsync, todoActions } from "./redux/slice/todoSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllTodoAsync,
+  getLoading,
+  todoActions,
+} from "./redux/slice/todoSlice";
+import GridLoader from "react-spinners/GridLoader";
 
 /* Importing Components */
 import Navbar from "./components/Navbar/Navbar";
@@ -14,6 +19,7 @@ import UpdateTodo from "./pages/UpdateTodo/UpdateTodo";
 function App() {
   /* Defining Dispatcher */
   const dispatch = useDispatch();
+  const loading = useSelector(getLoading);
 
   /* Getting all todos on component mounting */
   useEffect(() => {
@@ -49,7 +55,14 @@ function App() {
   return (
     <>
       {/* Passing all data router objects to this component to render the app and enable the rest of the data APIs */}
-      <RouterProvider router={router} />
+      {loading ? (
+        <div className="loader">
+          {" "}
+          <GridLoader color="green" />
+        </div>
+      ) : (
+        <RouterProvider router={router} />
+      )}
     </>
   );
 }

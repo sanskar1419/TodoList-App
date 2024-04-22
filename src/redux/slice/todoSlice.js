@@ -194,3 +194,4 @@ export const getError = (state) => state.todo.error;
 export const getAddTodoLoading = (state) => state.todo.addLoading;
 export const getToggleTodoLoading = (state) => state.todo.toggleLoading;
 export const getUpdatedTodo = (state) => state.todo.todoToUpdate;
+export const getLoading = (state) => state.todo.loading;
