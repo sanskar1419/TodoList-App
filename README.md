@@ -4,7 +4,15 @@ TodoList_App is a simple todo application where user an manage there task and ha
 
 ## Tech Stack
 
-**Client:** ReactJs, CSS, HTML, Redux, tailwind Css
+**Client:** ReactJs, CSS, HTML, Redux, tailwind css, daisyUI
+
+## Deployment Link
+
+To view the web application go to this link
+
+```bash
+   https://todo-list-ppymttp3b-sanskar-guptas-projects.vercel.app
+```
 
 ## Installation
 
@@ -13,7 +21,7 @@ To install the Busy_Buy, follow these steps:
 Clone this repository using the following command:
 
 ```
-$ git clone https://github.com/sanskar1419/Busy-Buy-Full-Stack-Application-.git
+$ git clone https://github.com/sanskar1419/TodoList-App.git
 ```
 
 Install the dependencies:
